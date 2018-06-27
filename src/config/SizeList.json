@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Kicsi",
+    "shortName": "S"
+  },
+  {
+    "name": "Közepes",
+    "shortName": "M"
+  },
+  {
+    "name": "Nagy",
+    "shortName": "L"
+  }
+]
