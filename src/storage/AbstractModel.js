@@ -26,7 +26,6 @@ class AbstractModel {
     data.forEach((keyValuePairArray) => {
       const splittedKey = keyValuePairArray[0].split(":");
       let tmpObj = {};
-      let tmpObj2 = {};
       splittedKey.shift();
       splittedKey.reverse();
 //s

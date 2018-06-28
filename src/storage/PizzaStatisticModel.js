@@ -2,8 +2,10 @@ import AbstractModel from './AbstractModel';
 
 class PizzaStatisticModel extends AbstractModel {
 
-  //dbName is a must have variable
-  dbName = '@PizzaStatisticModel';
+  constructor () {
+    super();
+    this.dbName = '@PizzaStatistics';
+  }
 
 }
 

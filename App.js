@@ -25,7 +25,6 @@ class App extends Component {
   };
 
   render() {
-
     if (!this.state.isReady) {
       return (
         <AppLoading
@@ -48,16 +47,17 @@ class App extends Component {
   }
 
   static async _cacheResourcesAsync() {
-    //load fonts before render
+    //load fonts before render  dsdsddddd
     const fontAssets = Font.loadAsync({
       'Roboto': require('native-base/Fonts/Roboto.ttf'),
       'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
+      'Ionicons': require('@expo/vector-icons/fonts/Ionicons.ttf')
     });
 
     //init Db data before render
     const dbInit = App.setDbStatus();
 
-    return Promise.all([...fontAssets, ...dbInit]);
+    return Promise.all([fontAssets, dbInit]);
   }
 
   setActivePage(componentName, values) {

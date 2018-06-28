@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "author": {
-    "name" : "Márton Szvetkó",
-    "email" : "szvetko.marton@gmail.com"
+    "name": "Márton Szvetkó",
+    "email": "szvetko.marton@gmail.com"
   },
   "devDependencies": {
     "jest-expo": "~27.0.0",
@@ -23,6 +23,7 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@expo/vector-icons": "^6.3.1",
     "expo": "^27.0.1",
     "moment": "^2.22.2",
     "moment-duration-format": "^2.2.2",
