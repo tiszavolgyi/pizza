@@ -33,6 +33,10 @@ class StartTimerFormHandler {
         this.pizzaName
       ],
       [
+        `${dbFrontKey}:pizzaId`,
+        `${this.pizzaId}`
+      ],
+      [
         `${dbFrontKey}:size`,
         this.sizeShortName
       ],

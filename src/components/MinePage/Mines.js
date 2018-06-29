@@ -18,14 +18,14 @@ class Mines extends Component {
             <Row size={7} style={ mineTitleRow }><H3 style={ mineTitle }>{ 'Alsó akna' }</H3></Row>
             <Row size={93}>
               <Col style={ mineCol }>
-                <MineSocket setActivePage={this.props.setActivePage} socketKey={0} mine={ 'Alsó akna' }/>
-                <MineSocket setActivePage={this.props.setActivePage} socketKey={1} mine={ 'Alsó akna' }/>
-                <MineSocket setActivePage={this.props.setActivePage} socketKey={2} mine={ 'Alsó akna' }/>
+                <MineSocket setActivePage={this.props.setActivePage} reloadStats={this.props.reloadStats} socketKey={0} mine={ 'Alsó akna' }/>
+                <MineSocket setActivePage={this.props.setActivePage} reloadStats={this.props.reloadStats} socketKey={1} mine={ 'Alsó akna' }/>
+                <MineSocket setActivePage={this.props.setActivePage} reloadStats={this.props.reloadStats} socketKey={2} mine={ 'Alsó akna' }/>
               </Col>
               <Col style={ mineCol }>
-                <MineSocket setActivePage={this.props.setActivePage} socketKey={3} mine={ 'Alsó akna' }/>
-                <MineSocket setActivePage={this.props.setActivePage} socketKey={4} mine={ 'Alsó akna' }/>
-                <MineSocket setActivePage={this.props.setActivePage} socketKey={5} mine={ 'Alsó akna' }/>
+                <MineSocket setActivePage={this.props.setActivePage} reloadStats={this.props.reloadStats} socketKey={3} mine={ 'Alsó akna' }/>
+                <MineSocket setActivePage={this.props.setActivePage} reloadStats={this.props.reloadStats} socketKey={4} mine={ 'Alsó akna' }/>
+                <MineSocket setActivePage={this.props.setActivePage} reloadStats={this.props.reloadStats} socketKey={5} mine={ 'Alsó akna' }/>
               </Col>
             </Row>
           </Col>
@@ -33,14 +33,14 @@ class Mines extends Component {
             <Row size={7} style={ mineTitleRow }><H3 style={ mineTitle }>{ 'Felső akna' }</H3></Row>
             <Row size={93}>
               <Col style={ mineCol }>
-                <MineSocket setActivePage={this.props.setActivePage} socketKey={6} mine={ 'Felső akna' }/>
-                <MineSocket setActivePage={this.props.setActivePage} socketKey={7} mine={ 'Felső akna' }/>
-                <MineSocket setActivePage={this.props.setActivePage} socketKey={8} mine={ 'Felső akna' }/>
+                <MineSocket setActivePage={this.props.setActivePage} reloadStats={this.props.reloadStats} socketKey={6} mine={ 'Felső akna' }/>
+                <MineSocket setActivePage={this.props.setActivePage} reloadStats={this.props.reloadStats} socketKey={7} mine={ 'Felső akna' }/>
+                <MineSocket setActivePage={this.props.setActivePage} reloadStats={this.props.reloadStats} socketKey={8} mine={ 'Felső akna' }/>
               </Col>
               <Col style={ mineCol }>
-                <MineSocket setActivePage={this.props.setActivePage} socketKey={9} mine={ 'Felső akna' }/>
-                <MineSocket setActivePage={this.props.setActivePage} socketKey={10} mine={ 'Felső akna' }/>
-                <MineSocket setActivePage={this.props.setActivePage} socketKey={11} mine={ 'Felső akna' }/>
+                <MineSocket setActivePage={this.props.setActivePage} reloadStats={this.props.reloadStats} socketKey={9} mine={ 'Felső akna' }/>
+                <MineSocket setActivePage={this.props.setActivePage} reloadStats={this.props.reloadStats} socketKey={10} mine={ 'Felső akna' }/>
+                <MineSocket setActivePage={this.props.setActivePage} reloadStats={this.props.reloadStats} socketKey={11} mine={ 'Felső akna' }/>
               </Col>
             </Row>
           </Col>

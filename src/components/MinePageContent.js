@@ -4,16 +4,24 @@ import Statistics from './MinePage/Statistics';
 import { Content, Grid } from 'native-base';
 
 class MinePageContent extends Component {
-  render() {
 
+  constructor (props) {
+    super(props);
+    this.reloadStats = this.reloadStats.bind(this);
+  }
+  render() {
     return (
       <Content>
         <Grid>
-          <Mines setActivePage={this.props.setActivePage} />
-          <Statistics bgColor={"#636363"} />
+          <Mines setActivePage={this.props.setActivePage} reloadStats={this.reloadStats}/>
+          <Statistics onRef={ref => (this.child = ref)} bgColor={"#636363"} />
         </Grid>
       </Content>
     );
+  }
+
+  reloadStats() {
+    this.child.reloadStats();
   }
 }
 

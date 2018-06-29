@@ -16,7 +16,7 @@ class StartTimerButton extends Component {
         </Row>
       </Grid>
     );
-  }//ssdd
+  }
 
   buttonOnPress() {
     if (this.props.formData.selectedPizzaId !== undefined && this.props.formData.selectedSizeId !== undefined) {

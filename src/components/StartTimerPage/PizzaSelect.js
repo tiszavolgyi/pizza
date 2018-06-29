@@ -47,7 +47,6 @@ class PizzaSelect extends Component {
         <PizzaSelectButton pizzaName={ data.name } pizzaId={ index } key={ index } isSelected={this.state.pizzaSelected[index]} changeSelectedPizza={this.changeSelectedPizza} />
       );
     });
-    console.log(renderedPizzaSelectList.length);
 
     renderedPizzaSelectList.forEach((value, index) => {
       tmpPizzaSelectList[counter] = value;

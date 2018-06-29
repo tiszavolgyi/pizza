@@ -14,6 +14,7 @@ class PizzaTimerModel extends AbstractModel {
       `${dbFrontKey}:start`,
       `${dbFrontKey}:finish`,
       `${dbFrontKey}:pizza`,
+      `${dbFrontKey}:pizzaId`,
       `${dbFrontKey}:size`,
       `${dbFrontKey}:isEmpty`
     ];
@@ -28,6 +29,7 @@ class PizzaTimerModel extends AbstractModel {
       `${dbFrontKey}:start`,
       `${dbFrontKey}:finish`,
       `${dbFrontKey}:pizza`,
+      `${dbFrontKey}:pizzaId`,
       `${dbFrontKey}:size`,
     ];
 

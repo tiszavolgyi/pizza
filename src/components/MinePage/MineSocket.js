@@ -25,6 +25,7 @@ class MineSocket extends Component{
     const queryArray = [
       `${this.pizzaTimerModel.dbName}:socket_${ this.props.socketKey }:isEmpty`,
       `${this.pizzaTimerModel.dbName}:socket_${ this.props.socketKey }:pizza`,
+      `${this.pizzaTimerModel.dbName}:socket_${ this.props.socketKey }:pizzaId`,
       `${this.pizzaTimerModel.dbName}:socket_${ this.props.socketKey }:size`,
       `${this.pizzaTimerModel.dbName}:socket_${ this.props.socketKey }:start`,
       `${this.pizzaTimerModel.dbName}:socket_${ this.props.socketKey }:finish`
@@ -55,7 +56,7 @@ class MineSocket extends Component{
 
       return (
         <Row style={ mineSocket }>
-          <CloseButtonIfNeeded socketKey={ this.props.socketKey } loadSocketData={ this.loadSocketData } />
+          <CloseButtonIfNeeded socketKey={ this.props.socketKey } loadSocketData={ this.loadSocketData } reloadStats={this.props.reloadStats} socketData={this.state.socketData} />
           <MineSocketContent setActivePage={ this.props.setActivePage } socketKey={ this.props.socketKey } mine={ this.props.mine } socketData={ this.state.socketData } />
         </Row>
       );
