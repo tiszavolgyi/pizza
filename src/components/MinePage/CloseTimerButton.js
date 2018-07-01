@@ -23,6 +23,7 @@ class CloseTimerButton extends Component {
   onButtonPress() {
     this.pizzaTimerModel.setSocketToEmpty(this.props.socketKey)
       .then(() => {
+        this.props.changeBgColor('grey');
         this.props.loadSocketData();
       });
 

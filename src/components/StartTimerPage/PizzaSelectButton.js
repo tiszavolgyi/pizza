@@ -4,14 +4,6 @@ import { Button, Left, Col, Right, Radio } from 'native-base';
 
 class PizzaSelectButton extends Component {
 
-  state = {
-    pizzaSelected: [false, false, false, false, false, false, false, false, false, false, false, false]
-  }
-
-  componentWillMount() {
-
-  }
-
   render() {
     const { pizzaSelectCol, radioButton } = style;
 

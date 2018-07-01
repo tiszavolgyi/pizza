@@ -38,18 +38,18 @@ class Timer extends Component {
     }
 
     return (
-      <View style={{width: 100}}>
+      <View style={{width: 110}}>
         <AnimatedCircularProgress
-          size={100}
+          size={110}
           width={3}
           fill={this.state.timeProgress}
           tintColor="#00e0ff"
           backgroundColor="#3d5875">
           {
             (fill) => (
-              <View>
-                <Text style={{alignContent: 'center'}}> { this.state.socketData.pizza } </Text>
-                <Text style={{alignContent: 'center'}}> { this.formattedTimeLeft() } </Text>
+              <View style={{alignContent: 'center'}}>
+                <Text style={{alignSelf: 'center'}}> { this.state.socketData.pizza } </Text>
+                <Text style={{alignSelf: 'center', fontWeight: 'bold', fontSize: 20}}> { this.formattedTimeLeft() } </Text>
               </View>
             )
           }
@@ -75,6 +75,15 @@ class Timer extends Component {
     let timeLeft = 1;
     this.timeCounter = setInterval(() => {
       timeLeft = finishDate - moment().format('x').toString();
+
+      if (timeLeft > 60000) {
+        this.props.changeBgColor('green');
+      } else if(timeLeft > 15000) {
+        this.props.changeBgColor('yellow');
+      } else {
+        this.props.changeBgColor('red');
+      }
+
       if (timeLeft < 0) {
         timeLeft = 0;
       }

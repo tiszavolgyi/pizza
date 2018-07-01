@@ -12,14 +12,17 @@ class MineSocket extends Component{
   constructor (props) {
     super(props);
     this.loadSocketData = this.loadSocketData.bind(this);
+    this.changeBgColor = this.changeBgColor.bind(this);
     this.loadSocketData();
   }
 
   pizzaTimerModel = new PizzaTimerModel();
   state = {
     socketData: {},
-    isDbDataLoaded: false
+    isDbDataLoaded: false,
+    bgColor: '#E0E0E0'
   }
+
 
   loadSocketData() {
     const queryArray = [
@@ -47,7 +50,12 @@ class MineSocket extends Component{
   }
 
   render() {
-    const { mineSocket } = styles;
+    const { mineSocket } = this.styles;
+    const socketBackground = StyleSheet.create({
+      bg: {
+        backgroundColor: this.state.bgColor
+      }
+    });
 
     if (this.state.isDbDataLoaded) {
 
@@ -55,9 +63,9 @@ class MineSocket extends Component{
       const CloseButtonIfNeeded = (MineSocketContent === Timer) ? CloseTimerButton : View;
 
       return (
-        <Row style={ mineSocket }>
-          <CloseButtonIfNeeded socketKey={ this.props.socketKey } loadSocketData={ this.loadSocketData } reloadStats={this.props.reloadStats} socketData={this.state.socketData} />
-          <MineSocketContent setActivePage={ this.props.setActivePage } socketKey={ this.props.socketKey } mine={ this.props.mine } socketData={ this.state.socketData } />
+        <Row style={ [mineSocket, socketBackground.bg] }>
+          <CloseButtonIfNeeded socketKey={ this.props.socketKey } loadSocketData={ this.loadSocketData } changeBgColor={ this.changeBgColor } reloadStats={this.props.reloadStats} socketData={this.state.socketData} />
+          <MineSocketContent setActivePage={ this.props.setActivePage } changeBgColor={ this.changeBgColor } socketKey={ this.props.socketKey } mine={ this.props.mine } socketData={ this.state.socketData } />
         </Row>
       );
     } else {
@@ -68,19 +76,43 @@ class MineSocket extends Component{
       );
     }
   }
-}
 
-const styles = StyleSheet.create({
-  mineSocket: {
-    height: 250,
-    margin: 10,
-    backgroundColor: '#E0E0E0',
-    borderRadius: 4,
-    borderWidth: 1,
-    borderColor: '#000',
-    justifyContent: 'center',
-    alignItems: 'center'
+  changeBgColor(color) {
+    let colorCode;
+
+    switch (color) {
+      case 'red':
+        colorCode = '#F30000';
+        break;
+      case 'yellow':
+        colorCode = '#F49B00';
+        break;
+      case 'green':
+        colorCode = '#67D075';
+        break;
+      case 'grey':
+      default:
+        colorCode = '#E0E0E0';
+        break;
+    }
+
+    if(this.state.bgColor !== colorCode) {
+      this.setState({ bgColor: colorCode})
+    }
   }
-})
+
+  styles = StyleSheet.create({
+    mineSocket: {
+      height: 250,
+      margin: 10,
+      backgroundColor: '#E0E0E0',
+      borderRadius: 4,
+      borderWidth: 1,
+      borderColor: '#000',
+      justifyContent: 'center',
+      alignItems: 'center'
+    }
+  })
+}
 
 export default MineSocket;

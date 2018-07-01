@@ -3,7 +3,6 @@ import PizzaList from '../../config/PizzaList.json';
 import { Grid, Row, H3 } from 'native-base';
 
 import PizzaSelectButton from './PizzaSelectButton';
-import { StyleSheet } from 'react-native'
 
 class PizzaSelect extends Component {
 
