@@ -1,5 +1,12 @@
 {
   "expo": {
-    "sdkVersion": "27.0.0"
+    "name": "Pizza",
+    "icon": "./src/img/pizza-icon.png",
+    "version": "0.3.0",
+    "slug": "pizza",
+    "sdkVersion": "27.0.0",
+    "android": {
+      "package": "com.phelion.pizza"
+    }
   }
 }
