@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Col, Row, Grid, H3 } from 'native-base';
-import Timer from './Timer';
-import EmptyMineSocketCont from './EmptyMineSocketCont';
 import MineSocket from './MineSocket';
 
 

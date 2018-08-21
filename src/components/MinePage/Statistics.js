@@ -31,9 +31,31 @@ class Statistics extends Component {
     this.props.onRef(undefined)
   }
 
+  getStatContent() {
+    const { arrowLeft, arrowRight } = style;
 
+    if( this.state.isDbDataLoaded ) {
+      return (
+        <Grid style={{flex: 0}}>
+          <Col size={20}>
+            <Button style={ arrowLeft } transparent light onPress={ () => this.onLeftButtonPress() }>
+              <Text><Icon name={'arrow-dropleft-circle'} /></Text>
+            </Button>
+          </Col>
+          <Col size={60}><Text style={{textAlign: 'center', marginTop: 13, color: '#fff'}}>{this.state.readableStatDate}</Text></Col>
+          <Col size={20}>
+            <Button style={ arrowRight } transparent light onPress={ () => this.onRightButtonPress() }>
+              <Text><Icon name={'arrow-dropright-circle'} /></Text>
+            </Button>
+          </Col>
+        </Grid>
+      );
+    } else {
+      return <Spinner color='blue' />
+    }
+  }
   render() {
-    const { wrapper, arrowLeft, arrowRight } = style;
+    const { wrapper } = style;
     const wrapperBackground = StyleSheet.create({
       bg: {
         backgroundColor: this.props.bgColor
@@ -42,29 +64,14 @@ class Statistics extends Component {
 
     this.getRenderedStatistics();
 
-    if( this.state.isDbDataLoaded ) {
-      return (
-        <Col size={20} style={[wrapper, wrapperBackground.bg]}>
-          <H3 style={{ color: '#fff', textAlign: 'center', marginTop: 5 }}>Statisztika</H3>
-          <Grid style={{flex: 0}}>
-            <Col size={20}>
-              <Button style={ arrowLeft } transparent light onPress={ () => this.onLeftButtonPress() }>
-                <Text><Icon name={'arrow-dropleft-circle'} /></Text>
-              </Button>
-            </Col>
-            <Col size={60}><Text style={{textAlign: 'center', marginTop: 13, color: '#fff'}}>{this.state.readableStatDate}</Text></Col>
-            <Col size={20}>
-              <Button style={ arrowRight } transparent light onPress={ () => this.onRightButtonPress() }>
-                <Text><Icon name={'arrow-dropright-circle'} /></Text>
-              </Button>
-            </Col>
-          </Grid>
-          { this.renderedStatList }
-        </Col>
-      );
-    } else {
-      return <Spinner color='blue' />
-    }
+    return (
+      <Col size={20} style={[wrapper, wrapperBackground.bg]}>
+        <H3 style={{ color: '#fff', textAlign: 'center', marginTop: 5 }}>Statisztika</H3>
+        { this.getStatContent() }
+        { this.renderedStatList }
+      </Col>
+    );
+
   }
 
   onLeftButtonPress() {
@@ -108,7 +115,7 @@ class Statistics extends Component {
     }
   }
 }
-//ssddfffhh
+
 const style = StyleSheet.create({
   wrapper: {
     height: 550,

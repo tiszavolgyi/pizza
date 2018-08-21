@@ -28,7 +28,7 @@ class AbstractModel {
       let tmpObj = {};
       splittedKey.shift();
       splittedKey.reverse();
-//s
+
       splittedKey.forEach((value) => {
         if (Object.keys(tmpObj).length === 0 && tmpObj.constructor === Object) {
           tmpObj[value] = keyValuePairArray[1]
