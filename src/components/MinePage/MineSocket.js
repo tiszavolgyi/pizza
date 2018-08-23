@@ -6,6 +6,7 @@ import PizzaTimerModel from '../../storage/PizzaTimerModel';
 import Timer from './Timer';
 import EmptyMineSocketCont from './EmptyMineSocketCont';
 import CloseTimerButton from './CloseTimerButton';
+import MoveTimerButton from './MoveTimerButton'
 
 class MineSocket extends Component{
 
@@ -61,11 +62,13 @@ class MineSocket extends Component{
 
       const MineSocketContent = (this.state.socketData.isEmpty) ? EmptyMineSocketCont : Timer;
       const CloseButtonIfNeeded = (MineSocketContent === Timer) ? CloseTimerButton : View;
+      const MoveTimerButtonIfNeeded = (MineSocketContent === Timer) ? MoveTimerButton : View;
 
       return (
         <Row style={ [mineSocket, socketBackground.bg] }>
+          <MoveTimerButtonIfNeeded changeMoveUI={this.props.changeMoveUI} socketKey={ this.props.socketKey } socketData={this.state.socketData} />
           <CloseButtonIfNeeded socketKey={ this.props.socketKey } loadSocketData={ this.loadSocketData } changeBgColor={ this.changeBgColor } reloadStats={this.props.reloadStats} socketData={this.state.socketData} />
-          <MineSocketContent setActivePage={ this.props.setActivePage } changeBgColor={ this.changeBgColor } socketKey={ this.props.socketKey } mine={ this.props.mine } socketData={ this.state.socketData } />
+          <MineSocketContent isMoveUI={ this.props.isMoveUI } changeMoveUI={this.props.changeMoveUI} setActivePage={ this.props.setActivePage } changeBgColor={ this.changeBgColor } socketKey={ this.props.socketKey } mine={ this.props.mine } socketData={ this.state.socketData } />
         </Row>
       );
     } else {
@@ -76,6 +79,7 @@ class MineSocket extends Component{
       );
     }
   }
+
 
   changeBgColor(color) {
     let colorCode;

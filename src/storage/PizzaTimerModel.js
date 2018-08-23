@@ -22,6 +22,19 @@ class PizzaTimerModel extends AbstractModel {
     return this.getMultipleItemsInObject(queryData);
   }
 
+  async getEmptySockets() {
+    let emptySockets = [];
+
+    for (let i=0; i < 12; i++) {
+      const item = await this.getItem(`socket_${i}:isEmpty`);
+      if (item === "true"){
+        emptySockets.push(i);
+      }
+    }
+
+    return emptySockets;
+  }
+
   async setSocketToEmpty(socketId) {
     const dbFrontKey = `${this.dbName}:socket_${socketId}`;
 

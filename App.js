@@ -93,7 +93,6 @@ class App extends Component {
 
   static async setDbStatus() {
     const pizzaTimerModel = new PizzaTimerModel();
-
     if (await pizzaTimerModel.getItem('socket_0:isEmpty') === null || await pizzaTimerModel.getItem('socket_11:isEmpty') === null) {
       return DbInit.initPizzaTimer();
     }

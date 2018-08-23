@@ -5,17 +5,36 @@ import Pages from '../../enum/Pages';
 
 class EmptyMineSocketCont extends Component{
 
+  constructor (props) {
+    super(props);
+  }
+
   render() {
     const { mineSocket, newButton } = styles;
 
+    const h3Text = this.props.isMoveUI ? "Áthelyezés" : "Üres";
+    const buttonText = this.props.isMoveUI ? "Ide" : "Új";
+
     return (
       <View>
-        <H3 style={{ textAlign: 'center' }}>Üres</H3>
-        <Button onPress={() => this.props.setActivePage(Pages.START_TIMER_PAGE, { socketKey: this.props.socketKey, mine: this.props.mine })} success style={ newButton }>
-          <Text>Új</Text>
+        <H3 style={{ textAlign: 'center' }}>{ h3Text }</H3>
+        <Button onPress={() => this.onButtonPress()} success style={ newButton }>
+          <Text>{ buttonText }</Text>
         </Button>
       </View>
     );
+  }
+
+  onButtonPress() {
+    if (this.props.isMoveUI === true) {
+      //TODO: write the logic here code here
+      //TODO: lekerni a db adatokat a kivalasztott aknarol, amit ide akarok helyezni
+      //TODO: berakni a db-be a lekert adatokat ehhez az aknahoz
+      //TODO: kitorolni az adatokat az eredeti aknabol, es uresse tenni azt
+      this.props.changeMoveUI(false);
+    } else {
+      this.props.setActivePage(Pages.START_TIMER_PAGE, { socketKey: this.props.socketKey, mine: this.props.mine })
+    }
   }
 }
 
