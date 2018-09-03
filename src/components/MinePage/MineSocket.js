@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native'
 import { Row, Spinner } from 'native-base';
+import { connect } from 'react-redux';
 
+import * as action from '../../reduxActions';
 import PizzaTimerModel from '../../storage/PizzaTimerModel';
 import Timer from './Timer';
 import EmptyMineSocketCont from './EmptyMineSocketCont';
 import CloseTimerButton from './CloseTimerButton';
-import MoveTimerButton from './MoveTimerButton'
+import MoveTimerButton from './MoveTimerButton';
 
-class MineSocket extends Component{
+class MineSocket extends Component {
 
   constructor (props) {
     super(props);
     this.loadSocketData = this.loadSocketData.bind(this);
     this.changeBgColor = this.changeBgColor.bind(this);
-    this.loadSocketData();
   }
 
   pizzaTimerModel = new PizzaTimerModel();
@@ -24,6 +25,17 @@ class MineSocket extends Component{
     bgColor: '#E0E0E0'
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    if(!this.props.mineSocketListForUpdate || !this.props.mineSocketListForUpdate.length ) {
+      if (!nextProps.mineSocketListForUpdate || !nextProps.mineSocketListForUpdate.length) {
+        if (this.state.isDbDataLoaded === nextState.isDbDataLoaded) {
+          return false;
+        }
+      }
+    }
+
+    return true;
+  }
 
   loadSocketData() {
     const queryArray = [
@@ -44,10 +56,9 @@ class MineSocket extends Component{
 
   afterSocketDataLoaded(value) {
     value.isEmpty = (value.isEmpty  === 'true')
-    this.setState({
-      socketData: value,
-      isDbDataLoaded: true
-    });
+    this.state.socketData = value;
+    this.state.isDbDataLoaded = true;
+    this.props.updateMineSocketDbData([]);
   }
 
   render() {
@@ -58,25 +69,39 @@ class MineSocket extends Component{
       }
     });
 
-    if (this.state.isDbDataLoaded) {
-
+    if (this.state.isDbDataLoaded && !this.needToUpdate()) {
       const MineSocketContent = (this.state.socketData.isEmpty) ? EmptyMineSocketCont : Timer;
       const CloseButtonIfNeeded = (MineSocketContent === Timer) ? CloseTimerButton : View;
       const MoveTimerButtonIfNeeded = (MineSocketContent === Timer) ? MoveTimerButton : View;
-
       return (
         <Row style={ [mineSocket, socketBackground.bg] }>
           <MoveTimerButtonIfNeeded changeMoveUI={this.props.changeMoveUI} socketKey={ this.props.socketKey } socketData={this.state.socketData} />
           <CloseButtonIfNeeded socketKey={ this.props.socketKey } loadSocketData={ this.loadSocketData } changeBgColor={ this.changeBgColor } reloadStats={this.props.reloadStats} socketData={this.state.socketData} />
           <MineSocketContent isMoveUI={ this.props.isMoveUI } changeMoveUI={this.props.changeMoveUI} setActivePage={ this.props.setActivePage } changeBgColor={ this.changeBgColor } socketKey={ this.props.socketKey } mine={ this.props.mine } socketData={ this.state.socketData } />
+          {/*<Button transparent style={ this.styles.closeButton } onPress={ () => this.props.setIsDbDataLoaded(this.props.socketKey, false) }>
+            <Text><Icon name={'md-close-circle'} /></Text>
+          </Button>*/}
         </Row>
       );
     } else {
+      console.log(this.props.socketKey);
       return (
         <Row style={ mineSocket }>
           <Spinner color='blue' />
         </Row>
       );
+    }
+  }
+
+  componentDidUpdate() {
+    if (!this.state.isDbDataLoaded || this.needToUpdate()) {
+      this.loadSocketData();
+    }
+  }
+
+  componentDidMount() {
+    if (!this.state.isDbDataLoaded || this.needToUpdate()) {
+      this.loadSocketData();
     }
   }
 
@@ -105,6 +130,20 @@ class MineSocket extends Component{
     }
   }
 
+  needToUpdate() {
+    let needToUpdate = false;
+
+    if(this.props.mineSocketListForUpdate && this.props.mineSocketListForUpdate.length) {
+      this.props.mineSocketListForUpdate.forEach((value) => {
+        if (this.props.socketKey === value) {
+          needToUpdate = true;
+        }
+      });
+    }
+
+    return needToUpdate;
+  }
+
   styles = StyleSheet.create({
     mineSocket: {
       height: 250,
@@ -119,4 +158,8 @@ class MineSocket extends Component{
   })
 }
 
-export default MineSocket;
+const mapStateToProps = state => {
+  return { mineSocketListForUpdate: state.mineSocketListForUpdate };
+}
+
+export default connect( mapStateToProps, action )(MineSocket);

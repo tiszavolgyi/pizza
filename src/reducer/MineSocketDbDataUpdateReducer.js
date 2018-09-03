@@ -1,6 +1,6 @@
 export default (state = null, action) => {
   switch (action.type) {
-    case "SET_IS_DB_DATA_LOADED" :
+    case "UPDATE_MINE_SOCKET_DB_DATA" :
       return action.payload;
     default:
       return state;

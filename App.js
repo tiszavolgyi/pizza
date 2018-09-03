@@ -8,6 +8,9 @@ import DbInit from './src/storage/DbInit';
 import PizzaTimerModel from './src/storage/PizzaTimerModel';
 import MinePageContent from './src/components/MinePageContent';
 import StartTimerPageContent from './src/components/StartTimerPageContent';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import reducers from './src/reducer';
 
 class App extends Component {
 
@@ -15,6 +18,7 @@ class App extends Component {
     super(props);
     this.setActivePage = this.setActivePage.bind(this);
   }
+  store = createStore(reducers);
 
   state = {
     isReady: false,
@@ -40,9 +44,11 @@ class App extends Component {
     const ActivePage = activePageObj.component;
 
     return (
-      <Container style={ container }>
-        <ActivePage setActivePage={this.setActivePage} values={activePageObj.values} />
-      </Container>
+      <Provider store={this.store}>
+        <Container style={ container }>
+          <ActivePage setActivePage={this.setActivePage} values={activePageObj.values} />
+        </Container>
+      </Provider>
     );
   }
 
