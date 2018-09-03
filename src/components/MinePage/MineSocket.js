@@ -162,4 +162,5 @@ const mapStateToProps = state => {
   return { mineSocketListForUpdate: state.mineSocketListForUpdate };
 }
 
+
 export default connect( mapStateToProps, action )(MineSocket);

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Button, Icon } from 'native-base';
 import { StyleSheet, Text } from 'react-native';
 import PizzaTimerModel from '../../storage/PizzaTimerModel';
@@ -41,6 +42,14 @@ const styles = StyleSheet.create({
     bottom: 0,
     right: 10
   }
-})
+});
+
+CloseTimerButton.propTypes = {
+  socketKey: PropTypes.number.isRequired,
+  changeBgColor: PropTypes.func.isRequired,
+  loadSocketData: PropTypes.func.isRequired,
+  socketData: PropTypes.object.isRequired,
+  reloadStats: PropTypes.func.isRequired
+};
 
 export default CloseTimerButton;

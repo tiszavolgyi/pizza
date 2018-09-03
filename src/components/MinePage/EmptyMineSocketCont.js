@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { StyleSheet, Text, View } from 'react-native';
 import { H3, Button } from 'native-base';
@@ -58,5 +59,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   }
 })
+
+EmptyMineSocketCont.propTypes = {
+  isMoveUi: PropTypes.bool.isRequired,
+  socketKey: PropTypes.number.isRequired,
+  changeMoveUI: PropTypes.func.isRequired,
+  setActivePage: PropTypes.func.isRequired,
+  mine: PropTypes.string.isRequired
+};
 
 export default connect(null, action)(EmptyMineSocketCont);

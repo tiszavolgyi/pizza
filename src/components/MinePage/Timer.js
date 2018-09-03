@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { View, Text } from 'react-native';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import momentDurationFormatSetup from 'moment-duration-format';
@@ -109,5 +110,11 @@ class Timer extends Component {
 
 
 }
+
+Timer.propTypes = {
+  socketData: PropTypes.object.isRequired,
+  socketKey: PropTypes.number.isRequired,
+  changeBgColor: PropTypes.func.isRequired
+};
 
 export default Timer;

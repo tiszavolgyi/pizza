@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Button, Icon } from 'native-base';
 import { StyleSheet, Text } from 'react-native';
 import PizzaTimerModel from '../../storage/PizzaTimerModel';
@@ -32,6 +33,10 @@ const styles = StyleSheet.create({
     top: 0,
     left: 10
   }
-})
+});
+
+MoveTimerButton.propTypes = {
+  changeMoveUI: PropTypes.func.isRequired
+};
 
 export default MoveTimerButton;
