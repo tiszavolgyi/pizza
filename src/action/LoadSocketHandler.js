@@ -24,4 +24,4 @@ class LoadSocketHandler {
   }
 }
 
-export default
+export default LoadSocketHandler;
