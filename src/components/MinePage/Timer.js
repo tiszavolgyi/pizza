@@ -4,6 +4,7 @@ import { View, Text } from 'react-native';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import momentDurationFormatSetup from 'moment-duration-format';
 import moment from 'moment';
+import { playSound } from '../../action/PlaySound';
 
 class Timer extends Component {
 
@@ -56,8 +57,6 @@ class Timer extends Component {
           </AnimatedCircularProgress>
         </View>
       )
-
-    //}
   }
 
   initTimer(savedData) {
@@ -102,6 +101,7 @@ class Timer extends Component {
 
       if (timeLeft === 0) {
         clearInterval(this.timeCounter);
+        playSound();
         this.onTimerFinished();
       }
     }, 1000);
