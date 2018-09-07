@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { View, Text } from 'react-native';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import momentDurationFormatSetup from 'moment-duration-format';
 import moment from 'moment';
-import PizzaTimerModel from '../../storage/PizzaTimerModel';
 
 class Timer extends Component {
 
@@ -13,7 +13,6 @@ class Timer extends Component {
   }
 
   state = {
-    socketData: this.props.socketData,
     start: undefined,
     finish: undefined,
     timeLeft: undefined,
@@ -22,51 +21,62 @@ class Timer extends Component {
   };
 
   timeCounter = undefined;
-  pizzaTimerModel = new PizzaTimerModel();
 
   componentWillUnmount() {
     clearInterval(this.timeCounter);
+    this.props.changeBgColor('grey');
+  }
+  componentWillUpdate() {
+    clearInterval(this.timeCounter);
+    this.initTimer(this.props.socketData.data)
+  }
+
+  componentWillMount() {
+    this.initTimer(this.props.socketData.data)
   }
 
   render() {
-    if (!this.timeCounter) {
-      this.getDbData()
-        .then(data => {
-          this.startTimer(data[`socket_${this.props.socketKey}`]);
-        })
-        .catch(e => console.log(e))
-    }
 
-    return (
-      <View style={{width: 110}}>
-        <AnimatedCircularProgress
-          size={110}
-          width={3}
-          fill={this.state.timeProgress}
-          tintColor="#00e0ff"
-          backgroundColor="#3d5875">
-          {
-            (fill) => (
-              <View style={{alignContent: 'center'}}>
-                <Text style={{alignSelf: 'center'}}> { this.state.socketData.pizza } </Text>
-                <Text style={{alignSelf: 'center', fontWeight: 'bold', fontSize: 20}}> { this.formattedTimeLeft() } </Text>
-              </View>
-            )
-          }
-        </AnimatedCircularProgress>
-      </View>
-    )
+      return (
+        <View style={{width: 110}}>
+          <AnimatedCircularProgress
+            size={110}
+            width={3}
+            fill={this.state.timeProgress}
+            tintColor="#00e0ff"
+            backgroundColor="#3d5875">
+            {
+              (fill) => (
+                <View style={{alignContent: 'center'}}>
+                  <Text style={{alignSelf: 'center'}}> { this.props.socketData.data.pizza } </Text>
+                  <Text style={{alignSelf: 'center', fontWeight: 'bold', fontSize: 20}}> { this.formattedTimeLeft() } </Text>
+                </View>
+              )
+            }
+          </AnimatedCircularProgress>
+        </View>
+      )
+
+    //}
   }
 
-  getDbData() {
-    return this.pizzaTimerModel.getTimerData(this.props.socketKey);
+  initTimer(savedData) {
+    if (this.getTimeLeft(savedData.finish) < 0) {
+      this.state.timeProgress = 0;
+      this.props.changeBgColor('red');
+    } else {
+      this.startTimer(savedData);
+    }
+  }
+
+  getTimeLeft(finishDate) {
+    return finishDate - moment().format('x').toString();
   }
 
   startTimer(savedData) {
     let startDate = savedData.start;
     let finishDate = savedData.finish;
     let duration = finishDate - startDate;
-    this.state.socketData.finish = finishDate;
     this.timer(startDate, finishDate, duration);
   }
 
@@ -74,7 +84,7 @@ class Timer extends Component {
 
     let timeLeft = 1;
     this.timeCounter = setInterval(() => {
-      timeLeft = finishDate - moment().format('x').toString();
+      timeLeft = this.getTimeLeft(finishDate);
 
       if (timeLeft > 60000) {
         this.props.changeBgColor('green');
@@ -92,7 +102,6 @@ class Timer extends Component {
 
       if (timeLeft === 0) {
         clearInterval(this.timeCounter);
-        this.timeCounter = undefined;
         this.onTimerFinished();
       }
     }, 1000);
@@ -109,5 +118,11 @@ class Timer extends Component {
 
 
 }
+
+Timer.propTypes = {
+  socketData: PropTypes.object.isRequired,
+  socketKey: PropTypes.number.isRequired,
+  changeBgColor: PropTypes.func.isRequired
+};
 
 export default Timer;

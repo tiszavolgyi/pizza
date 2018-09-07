@@ -10,7 +10,6 @@ class AbstractModel {
     return `${this.dbName}:${key}`;
   }
 
-
   async getItem (key) {
     return await AsyncStorage.getItem(this.createQueryKey(key));
   }

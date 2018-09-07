@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
 import { Container } from 'native-base';
 import { Font, AppLoading } from 'expo';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunkMiddleware from 'redux-thunk';
 
 import Pages from './src/enum/Pages';
 import DbInit from './src/storage/DbInit';
@@ -9,12 +12,18 @@ import PizzaTimerModel from './src/storage/PizzaTimerModel';
 import MinePageContent from './src/components/MinePageContent';
 import StartTimerPageContent from './src/components/StartTimerPageContent';
 
+import reducers from './src/reducer';
+
 class App extends Component {
 
   constructor (props) {
     super(props);
     this.setActivePage = this.setActivePage.bind(this);
   }
+  store = createStore(
+    reducers,
+    applyMiddleware(thunkMiddleware)
+  );
 
   state = {
     isReady: false,
@@ -40,9 +49,11 @@ class App extends Component {
     const ActivePage = activePageObj.component;
 
     return (
-      <Container style={ container }>
-        <ActivePage setActivePage={this.setActivePage} values={activePageObj.values} />
-      </Container>
+      <Provider store={this.store}>
+        <Container style={ container }>
+          <ActivePage setActivePage={this.setActivePage} values={activePageObj.values} />
+        </Container>
+      </Provider>
     );
   }
 
@@ -93,7 +104,6 @@ class App extends Component {
 
   static async setDbStatus() {
     const pizzaTimerModel = new PizzaTimerModel();
-
     if (await pizzaTimerModel.getItem('socket_0:isEmpty') === null || await pizzaTimerModel.getItem('socket_11:isEmpty') === null) {
       return DbInit.initPizzaTimer();
     }

@@ -9,7 +9,9 @@ class MinePageContent extends Component {
     super(props);
     this.reloadStats = this.reloadStats.bind(this);
   }
+
   render() {
+
     return (
       <Content>
         <Grid>
