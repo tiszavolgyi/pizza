@@ -1,18 +1,25 @@
 import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
+import { connect } from 'react-redux';
 import { Col, Row, Grid, H3 } from 'native-base';
+
 import MineSocket from './MineSocket';
+import * as action from '../../reduxActions';
 
 
 class Mines extends Component {
 
   state = {
-    isMoveUi: false
+    isMoveUI: false
   };
 
   constructor (props) {
     super(props);
     this.changeMoveUI = this.changeMoveUI.bind(this);
+  }
+
+  componentWillMount () {
+
   }
 
   render() {
@@ -25,14 +32,14 @@ class Mines extends Component {
             <Row size={7} style={ mineTitleRow }><H3 style={ mineTitle }>{ 'Alsó akna' }</H3></Row>
             <Row size={93}>
               <Col style={ mineCol }>
-                <MineSocket isMoveUI={ this.state.isMoveUi } changeMoveUI={ this.changeMoveUI } setActivePage={this.props.setActivePage} reloadStats={this.props.reloadStats} socketKey={0} mine={ 'Alsó akna' }/>
-                <MineSocket isMoveUI={ this.state.isMoveUi } changeMoveUI={ this.changeMoveUI } setActivePage={this.props.setActivePage} reloadStats={this.props.reloadStats} socketKey={1} mine={ 'Alsó akna' }/>
-                <MineSocket isMoveUI={ this.state.isMoveUi } changeMoveUI={ this.changeMoveUI } setActivePage={this.props.setActivePage} reloadStats={this.props.reloadStats} socketKey={2} mine={ 'Alsó akna' }/>
+                <MineSocket isMoveUI={ this.state.isMoveUI } changeMoveUI={ this.changeMoveUI } setActivePage={this.props.setActivePage} reloadStats={this.props.reloadStats} socketKey={0} mine={ 'Alsó akna' }/>
+                <MineSocket isMoveUI={ this.state.isMoveUI } changeMoveUI={ this.changeMoveUI } setActivePage={this.props.setActivePage} reloadStats={this.props.reloadStats} socketKey={1} mine={ 'Alsó akna' }/>
+                <MineSocket isMoveUI={ this.state.isMoveUI } changeMoveUI={ this.changeMoveUI } setActivePage={this.props.setActivePage} reloadStats={this.props.reloadStats} socketKey={2} mine={ 'Alsó akna' }/>
               </Col>
               <Col style={ mineCol }>
-                <MineSocket isMoveUI={ this.state.isMoveUi } changeMoveUI={ this.changeMoveUI } setActivePage={this.props.setActivePage} reloadStats={this.props.reloadStats} socketKey={3} mine={ 'Alsó akna' }/>
-                <MineSocket isMoveUI={ this.state.isMoveUi } changeMoveUI={ this.changeMoveUI } setActivePage={this.props.setActivePage} reloadStats={this.props.reloadStats} socketKey={4} mine={ 'Alsó akna' }/>
-                <MineSocket isMoveUI={ this.state.isMoveUi } changeMoveUI={ this.changeMoveUI } setActivePage={this.props.setActivePage} reloadStats={this.props.reloadStats} socketKey={5} mine={ 'Alsó akna' }/>
+                <MineSocket isMoveUI={ this.state.isMoveUI } changeMoveUI={ this.changeMoveUI } setActivePage={this.props.setActivePage} reloadStats={this.props.reloadStats} socketKey={3} mine={ 'Alsó akna' }/>
+                <MineSocket isMoveUI={ this.state.isMoveUI } changeMoveUI={ this.changeMoveUI } setActivePage={this.props.setActivePage} reloadStats={this.props.reloadStats} socketKey={4} mine={ 'Alsó akna' }/>
+                <MineSocket isMoveUI={ this.state.isMoveUI } changeMoveUI={ this.changeMoveUI } setActivePage={this.props.setActivePage} reloadStats={this.props.reloadStats} socketKey={5} mine={ 'Alsó akna' }/>
               </Col>
             </Row>
           </Col>
@@ -40,14 +47,14 @@ class Mines extends Component {
             <Row size={7} style={ mineTitleRow }><H3 style={ mineTitle }>{ 'Felső akna' }</H3></Row>
             <Row size={93}>
               <Col style={ mineCol }>
-                <MineSocket isMoveUI={ this.state.isMoveUi } changeMoveUI={ this.changeMoveUI } setActivePage={this.props.setActivePage} reloadStats={this.props.reloadStats} socketKey={6} mine={ 'Felső akna' }/>
-                <MineSocket isMoveUI={ this.state.isMoveUi } changeMoveUI={ this.changeMoveUI } setActivePage={this.props.setActivePage} reloadStats={this.props.reloadStats} socketKey={7} mine={ 'Felső akna' }/>
-                <MineSocket isMoveUI={ this.state.isMoveUi } changeMoveUI={ this.changeMoveUI } setActivePage={this.props.setActivePage} reloadStats={this.props.reloadStats} socketKey={8} mine={ 'Felső akna' }/>
+                <MineSocket isMoveUI={ this.state.isMoveUI } changeMoveUI={ this.changeMoveUI } setActivePage={this.props.setActivePage} reloadStats={this.props.reloadStats} socketKey={6} mine={ 'Felső akna' }/>
+                <MineSocket isMoveUI={ this.state.isMoveUI } changeMoveUI={ this.changeMoveUI } setActivePage={this.props.setActivePage} reloadStats={this.props.reloadStats} socketKey={7} mine={ 'Felső akna' }/>
+                <MineSocket isMoveUI={ this.state.isMoveUI } changeMoveUI={ this.changeMoveUI } setActivePage={this.props.setActivePage} reloadStats={this.props.reloadStats} socketKey={8} mine={ 'Felső akna' }/>
               </Col>
               <Col style={ mineCol }>
-                <MineSocket isMoveUI={ this.state.isMoveUi } changeMoveUI={ this.changeMoveUI } setActivePage={this.props.setActivePage} reloadStats={this.props.reloadStats} socketKey={9} mine={ 'Felső akna' }/>
-                <MineSocket isMoveUI={ this.state.isMoveUi } changeMoveUI={ this.changeMoveUI } setActivePage={this.props.setActivePage} reloadStats={this.props.reloadStats} socketKey={10} mine={ 'Felső akna' }/>
-                <MineSocket isMoveUI={ this.state.isMoveUi } changeMoveUI={ this.changeMoveUI } setActivePage={this.props.setActivePage} reloadStats={this.props.reloadStats} socketKey={11} mine={ 'Felső akna' }/>
+                <MineSocket isMoveUI={ this.state.isMoveUI } changeMoveUI={ this.changeMoveUI } setActivePage={this.props.setActivePage} reloadStats={this.props.reloadStats} socketKey={9} mine={ 'Felső akna' }/>
+                <MineSocket isMoveUI={ this.state.isMoveUI } changeMoveUI={ this.changeMoveUI } setActivePage={this.props.setActivePage} reloadStats={this.props.reloadStats} socketKey={10} mine={ 'Felső akna' }/>
+                <MineSocket isMoveUI={ this.state.isMoveUI } changeMoveUI={ this.changeMoveUI } setActivePage={this.props.setActivePage} reloadStats={this.props.reloadStats} socketKey={11} mine={ 'Felső akna' }/>
               </Col>
             </Row>
           </Col>
@@ -57,7 +64,7 @@ class Mines extends Component {
   }
 
   changeMoveUI (val) {
-    this.setState({isMoveUi: val});
+    this.setState({isMoveUI: val});
   }
 }
 
@@ -79,4 +86,4 @@ const style = StyleSheet.create({
   }
 });
 
-export default Mines;
+export default connect(null, action)(Mines);

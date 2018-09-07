@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
-import MineSocketDbDataUpdateReducer from './MineSocketDbDataUpdateReducer'
-
+import MineSocketDbDataLoadReducer from './MineSocketDbDataLoadReducer';
+import ReplaceSelectionReducer from './ReplaceSelectionReducer';
 
 export default combineReducers({
-  mineSocketListForUpdate: MineSocketDbDataUpdateReducer,
+  mineSocketData: MineSocketDbDataLoadReducer,
+  selectedForReplace: ReplaceSelectionReducer
 });

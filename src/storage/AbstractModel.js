@@ -10,11 +10,6 @@ class AbstractModel {
     return `${this.dbName}:${key}`;
   }
 
-  async getTestItem() {
-    console.log(await AsyncStorage.getItem(this.dbName));
-  }
-
-
   async getItem (key) {
     return await AsyncStorage.getItem(this.createQueryKey(key));
   }

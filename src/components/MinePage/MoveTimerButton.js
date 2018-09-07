@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Button, Icon } from 'native-base';
 import { StyleSheet, Text } from 'react-native';
-import PizzaTimerModel from '../../storage/PizzaTimerModel';
+
+import * as action from '../../reduxActions/MineSocketLoadAction';
 
 class MoveTimerButton extends Component {
-
-  pizzaTimerModel = new PizzaTimerModel();
 
   render() {
     const { moveButton } = styles;
@@ -19,12 +19,13 @@ class MoveTimerButton extends Component {
   }
 
   onButtonPress() {
-    this.props.changeMoveUI(true);
-    this.pizzaTimerModel.getEmptySockets()
-      .then((result) => {
-        console.log(result);
-      });
+    if (this.props.socketData.isMoveUI) {
+      this.props.changeMoveUI(false)
+    } else {
+      this.props.changeMoveUI(true, this.props.socketKey);
+    }
   }
+
 }
 
 const styles = StyleSheet.create({
@@ -39,4 +40,4 @@ MoveTimerButton.propTypes = {
   changeMoveUI: PropTypes.func.isRequired
 };
 
-export default MoveTimerButton;
+export default connect(null, action)(MoveTimerButton);
